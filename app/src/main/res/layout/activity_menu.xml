@@ -6,59 +6,60 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/azul_clarinho"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
             android:text="Olá, usuário seja bem-vindo(a)!"
+            android:textAlignment="center"
             android:textColor="@color/blue"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meu Perfil"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp"
+            android:text="Meu Perfil"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btCarteira"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Carteira de Vacinação"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp"
+            android:text="Registrar vacina"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btAgendamentos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agendamentos"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp"
+            android:text="Agendamentos"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btListaVacinas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vacinas tomadas"
-            android:textAllCaps="false"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp"
+            android:text="Carteira de vacinação"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

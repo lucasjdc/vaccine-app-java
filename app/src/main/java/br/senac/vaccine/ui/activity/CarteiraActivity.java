@@ -41,6 +41,11 @@ public class CarteiraActivity extends AppCompatActivity {
             String data = edData.getText().toString();
             String reforco = edReforco.getText().toString();
 
+            String vacinaFormatada = "Vacina: " + vacina;
+            String postoFormatado = "Posto: " + posto;
+            String dataFormatada = "Data: " + data;
+            String reforcoFormatado = "Reforço: " + reforco;
+
             // Verificar se vacina e data não estão vazios
             if (vacina.isEmpty() || data.isEmpty()) {
                 Toast.makeText(CarteiraActivity.this, "Por favor, preencha o campo vacina e data", Toast.LENGTH_SHORT).show();
@@ -48,12 +53,17 @@ public class CarteiraActivity extends AppCompatActivity {
             }
 
             // Criar o objeto Vacina
-            Vacina novaVacina = new Vacina(vacina, posto, data, reforco);
+            Vacina novaVacina = new Vacina(vacinaFormatada, postoFormatado, dataFormatada, reforcoFormatado);
 
             // Salvar a vacina usando o DAO
             VacinasDao dao = new VacinasDao();
             dao.adiciona(novaVacina);
+
+            edVacina.setText("");
+            edPosto.setText("");
+            edData.setText("");
+            edReforco.setText("");
+
         });
     }
 }
-
