@@ -11,10 +11,10 @@ public class VacinasDao {
 
     static {
         vacinas.add(new Vacina(
-                "Febre amarela",
-                "Centro",
-                "12/11/2024",
-                "não precisa"
+                "Vacina: Febre amarela",
+                "Posto: Centro",
+                "Data: 12/11/2024",
+                "Reforço: "
         ));
     }
 
