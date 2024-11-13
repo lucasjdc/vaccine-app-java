@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#1919E6</color>
     <color name="azul_clarinho">#D4DAF2</color>
+    <color name="cor_padrao">#0000FF</color>
+    <color name="cor_pressionado">#00FFFF</color>
 </resources>
