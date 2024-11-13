@@ -40,7 +40,6 @@ public class PerfilActivity extends AppCompatActivity {
         edAlergias = findViewById(R.id.activity_perfil_edit_alergias);
         btSalvar = findViewById(R.id.activity_perfil_bt_salvar);
 
-        // Carregar dados salvos (caso existam)
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         edNome.setText(sharedPreferences.getString("Nome", ""));
         edNascimento.setText(sharedPreferences.getString("Nascimento", ""));

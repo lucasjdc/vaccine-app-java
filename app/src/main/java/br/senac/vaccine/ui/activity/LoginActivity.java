@@ -42,13 +42,11 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Exemplo de ação para o botão de cadastro
         btnCadastrar.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
             startActivity(intent);
         });
 
-        // Exemplo de ação para o botão de login
         btnEntrar.setOnClickListener(v -> {
             String usuario = editUsuario.getText().toString();
             String senha = editSenha.getText().toString();

@@ -51,7 +51,6 @@ public class CadastroActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
 
-                // Redireciona o usuário de volta para a tela de login
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();

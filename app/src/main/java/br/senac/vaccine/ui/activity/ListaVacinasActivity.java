@@ -21,13 +21,9 @@ public class ListaVacinasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_vacinas);
 
-        // Obter a lista de vacinas do DAO
         listaDeVacinas = dao.buscaTodos();
-
-        // Passar o contexto (this) e a lista de vacinas para o adaptador
         vacinaAdapter = new ListaVacinasAdapter(this, listaDeVacinas);
 
-        // Configurar o RecyclerView
         RecyclerView recyclerViewVacinas = findViewById(R.id.recyclerViewVacinas);
         recyclerViewVacinas.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewVacinas.setAdapter(vacinaAdapter);

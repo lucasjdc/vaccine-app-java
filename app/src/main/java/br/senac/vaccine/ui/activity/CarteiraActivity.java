@@ -33,27 +33,22 @@ public class CarteiraActivity extends AppCompatActivity {
         edReforco = findViewById(R.id.activity_carteira_edit_reforco);
         btSalvar = findViewById(R.id.activity_carteira_btSalvar);
 
-        // Adicionar a nova vacina à lista
         btSalvar.setOnClickListener(v -> {
             String vacina = edVacina.getText().toString();
             String posto = edPosto.getText().toString();
             String data = edData.getText().toString();
             String reforco = edReforco.getText().toString();
 
-            // Verificar se vacina e data não estão vazios
             if (vacina.isEmpty() || data.isEmpty()) {
                 Toast.makeText(CarteiraActivity.this, "Por favor, preencha o campo vacina e data", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Criar o objeto Vacina
             Vacina novaVacina = new Vacina("Vacina: " + vacina, "Posto: " + posto, "Data: " + data, "Reforço: " + reforco);
 
-            // Salvar a vacina usando o DAO
             VacinasDao dao = new VacinasDao();
             dao.adiciona(novaVacina);
 
-            // Limpar os campos após salvar
             edVacina.setText("");
             edPosto.setText("");
             edData.setText("");
