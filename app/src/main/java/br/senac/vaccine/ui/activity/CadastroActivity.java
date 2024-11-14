@@ -47,6 +47,7 @@ public class CadastroActivity extends AppCompatActivity {
                 editor.putString("Email", email);
                 editor.putString("Senha", senha);
                 editor.putString("ConfirmaSenha", confirmaSenha);
+                editor.putString("UltimoUsuario", email);  // Armazena o último usuário logado
                 editor.apply();
 
                 Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();

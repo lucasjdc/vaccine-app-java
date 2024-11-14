@@ -24,7 +24,6 @@ public class PerfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -41,14 +40,17 @@ public class PerfilActivity extends AppCompatActivity {
         btSalvar = findViewById(R.id.activity_perfil_bt_salvar);
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        edNome.setText(sharedPreferences.getString("Nome", ""));
-        edNascimento.setText(sharedPreferences.getString("Nascimento", ""));
-        edSexo.setText(sharedPreferences.getString("Sexo", ""));
-        edEndereco.setText(sharedPreferences.getString("Endereco", ""));
-        edEmail.setText(sharedPreferences.getString("Email", ""));
-        edTelefone.setText(sharedPreferences.getString("Telefone", ""));
-        edAlergias.setText(sharedPreferences.getString("Alergias", ""));
+        String ultimoUsuario = sharedPreferences.getString("UltimoUsuario", "");
 
+        if (!ultimoUsuario.isEmpty()) {
+            edNome.setText(sharedPreferences.getString("Nome_" + ultimoUsuario, ""));
+            edNascimento.setText(sharedPreferences.getString("Nascimento_" + ultimoUsuario, ""));
+            edSexo.setText(sharedPreferences.getString("Sexo_" + ultimoUsuario, ""));
+            edEndereco.setText(sharedPreferences.getString("Endereco_" + ultimoUsuario, ""));
+            edEmail.setText(sharedPreferences.getString("Email_" + ultimoUsuario, ""));
+            edTelefone.setText(sharedPreferences.getString("Telefone_" + ultimoUsuario, ""));
+            edAlergias.setText(sharedPreferences.getString("Alergias_" + ultimoUsuario, ""));
+        }
 
         btSalvar.setOnClickListener(v -> {
             String nome = edNome.getText().toString();
@@ -60,13 +62,13 @@ public class PerfilActivity extends AppCompatActivity {
             String alergias = edAlergias.getText().toString();
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("Nome", nome);
-            editor.putString("Nascimento", nascimento);
-            editor.putString("Sexo", sexo);
-            editor.putString("Endereco", endereco);
-            editor.putString("Email", email);
-            editor.putString("Telefone", telefone);
-            editor.putString("Alergias", alergias);
+            editor.putString("Nome_" + ultimoUsuario, nome);
+            editor.putString("Nascimento_" + ultimoUsuario, nascimento);
+            editor.putString("Sexo_" + ultimoUsuario, sexo);
+            editor.putString("Endereco_" + ultimoUsuario, endereco);
+            editor.putString("Email_" + ultimoUsuario, email);
+            editor.putString("Telefone_" + ultimoUsuario, telefone);
+            editor.putString("Alergias_" + ultimoUsuario, alergias);
             editor.apply();
 
             Toast.makeText(this, "Alterações salvas com sucesso!", Toast.LENGTH_SHORT).show();
