@@ -1,5 +1,6 @@
 package br.senac.vaccine.ui.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ public class CarteiraActivity extends AppCompatActivity {
     private Button btSalvar;
 
     private VacinasDao vacinasDao; // Adicionando VacinasDao como atributo para reutilização
+    private String codigoUsuario; // Adicionado para armazenar o código do usuário
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,16 @@ public class CarteiraActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         vacinasDao = new VacinasDao(dbHelper);
 
+        // Recupera o código do usuário do SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        codigoUsuario = sharedPreferences.getString("CodigoUsuario", null);
+
+        if (codigoUsuario == null) {
+            Toast.makeText(this, "Erro: Código do usuário não encontrado!", Toast.LENGTH_SHORT).show();
+            finish(); // Finaliza a atividade se o código não for encontrado
+            return;
+        }
+
         // Configura o botão salvar
         btSalvar.setOnClickListener(v -> salvarVacina());
     }
@@ -58,7 +70,7 @@ public class CarteiraActivity extends AppCompatActivity {
         }
 
         // Cria uma nova instância de Vacina
-        Vacina novaVacina = new Vacina(vacina, posto, data, reforco);
+        Vacina novaVacina = new Vacina(0, vacina, posto, data, reforco, codigoUsuario);
 
         // Adiciona ao banco de dados
         long id = vacinasDao.adiciona(novaVacina);
@@ -76,3 +88,4 @@ public class CarteiraActivity extends AppCompatActivity {
         }
     }
 }
+

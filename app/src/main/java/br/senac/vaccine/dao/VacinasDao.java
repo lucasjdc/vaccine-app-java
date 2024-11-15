@@ -3,6 +3,7 @@ package br.senac.vaccine.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import br.senac.vaccine.database.DBHelper;
@@ -28,7 +29,7 @@ public class VacinasDao {
             if (cursor.moveToFirst()) {
                 do {
                     Vacina vacina = new Vacina(
-                            cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                            String.valueOf(cursor.getColumnIndexOrThrow("id")),
                             cursor.getString(cursor.getColumnIndexOrThrow("nome")),
                             cursor.getString(cursor.getColumnIndexOrThrow("posto")),
                             cursor.getString(cursor.getColumnIndexOrThrow("data")),
@@ -40,8 +41,12 @@ public class VacinasDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (cursor != null) cursor.close();
-            if (db != null) db.close();
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
         }
         return vacinas;
     }
@@ -54,6 +59,7 @@ public class VacinasDao {
         values.put("posto", vacina.getPosto());
         values.put("data", vacina.getData());
         values.put("reforco", vacina.getReforco());
+        values.put("codigo_usuario", vacina.getCodigoUsuario());
 
         long id = db.insert("vacinas", null, values);
         db.close();
@@ -62,8 +68,8 @@ public class VacinasDao {
 
     public void limparVacinas() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete("vacinas", null, null);
+        int rowsDeleted = db.delete("vacinas", null, null);
         db.close();
+        Log.i("VacinasDao", "Vacinas removidas: " + rowsDeleted);
     }
-
 }

@@ -6,22 +6,29 @@ public class Vacina {
     private String posto;
     private String data;
     private String reforco;
+    private String codigoUsuario;
 
     // Construtor sem ID
-    public Vacina(String nomeVacina, String posto, String data, String reforco) {
+    public Vacina(String nomeVacina, String posto, String data, String reforco, String codigoUsuario) {
         this.nomeVacina = nomeVacina;
         this.posto = posto;
         this.data = data;
         this.reforco = reforco;
+        this.codigoUsuario = codigoUsuario;
     }
 
     // Construtor com ID
-    public Vacina(int id, String nomeVacina, String posto, String data, String reforco) {
+    public Vacina(int id, String nomeVacina, String posto, String data, String reforco, String codigoUsuario) {
         this.id = id;
         this.nomeVacina = nomeVacina;
         this.posto = posto;
         this.data = data;
         this.reforco = reforco;
+        this.codigoUsuario = codigoUsuario;
+    }
+
+    public String getCodigoUsuario() {
+        return codigoUsuario;
     }
 
     public int getId() {
@@ -46,6 +53,10 @@ public class Vacina {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setCodigoUsuario(String codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     public void setPosto(String posto) {

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import br.senac.vaccine.R;
 import br.senac.vaccine.dao.VacinasDao;
 import br.senac.vaccine.database.DBHelper;
+import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText editNewUsuario;
@@ -33,10 +34,11 @@ public class CadastroActivity extends AppCompatActivity {
         btnCriarConta = findViewById(R.id.btnCriarConta);
 
         btnCriarConta.setOnClickListener(v -> {
-            String usuario = editNewUsuario.getText().toString();
-            String email = editTextTextEmailAddress.getText().toString();
-            String senha = editNewSenha.getText().toString();
-            String confirmaSenha = editTextConfirmeSenha.getText().toString();
+            String codigoUsuario = UUID.randomUUID().toString();
+            String usuario = editNewUsuario.getText().toString().trim();
+            String email = editTextTextEmailAddress.getText().toString().trim();
+            String senha = editNewSenha.getText().toString().trim();
+            String confirmaSenha = editTextConfirmeSenha.getText().toString().trim();
 
             if (usuario.isEmpty() || senha.isEmpty() || email.isEmpty() || confirmaSenha.isEmpty()) {
                 Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -46,13 +48,12 @@ public class CadastroActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-
                 // Salvar os dados do usuário
                 editor.putString("Usuario", usuario);
                 editor.putString("Email", email);
                 editor.putString("Senha", senha);
-                editor.putString("ConfirmaSenha", confirmaSenha);
                 editor.putString("UltimoUsuario", email);  // Armazena o último usuário logado
+                editor.putString("CodigoUsuario", codigoUsuario);
                 editor.apply();
 
                 // Limpar vacinas após o cadastro
@@ -68,4 +69,5 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 }
+
 
