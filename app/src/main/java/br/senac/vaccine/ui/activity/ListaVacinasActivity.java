@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import br.senac.vaccine.dao.VacinasDao;
+import br.senac.vaccine.database.DBHelper;
 import br.senac.vaccine.model.Vacina;
 import br.senac.vaccine.ui.recyclerview.adapter.ListaVacinasAdapter;
 
 public class ListaVacinasActivity extends AppCompatActivity {
 
-    private VacinasDao dao = new VacinasDao();
+    private VacinasDao dao;
     private ListaVacinasAdapter vacinaAdapter;
     private List<Vacina> listaDeVacinas;
 
@@ -20,6 +21,9 @@ public class ListaVacinasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_vacinas);
+
+        DBHelper dbHelper = new DBHelper(this);
+        dao = new VacinasDao(dbHelper);
 
         listaDeVacinas = dao.buscaTodos();
         vacinaAdapter = new ListaVacinasAdapter(this, listaDeVacinas);

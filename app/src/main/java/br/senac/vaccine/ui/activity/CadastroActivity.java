@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import br.senac.vaccine.R;
+import br.senac.vaccine.dao.VacinasDao;
+import br.senac.vaccine.database.DBHelper;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText editNewUsuario;
@@ -43,12 +45,19 @@ public class CadastroActivity extends AppCompatActivity {
             } else {
                 SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+                // Salvar os dados do usuário
                 editor.putString("Usuario", usuario);
                 editor.putString("Email", email);
                 editor.putString("Senha", senha);
                 editor.putString("ConfirmaSenha", confirmaSenha);
                 editor.putString("UltimoUsuario", email);  // Armazena o último usuário logado
                 editor.apply();
+
+                // Limpar vacinas após o cadastro
+                VacinasDao vacinasDao = new VacinasDao(new DBHelper(this));
+                vacinasDao.limparVacinas();
 
                 Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
 
