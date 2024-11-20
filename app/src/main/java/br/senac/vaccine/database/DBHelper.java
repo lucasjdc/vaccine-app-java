@@ -16,7 +16,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Criação da tabela com a coluna 'codigo_usuario' já incluída
         String sql = """
                 CREATE TABLE vacinas (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -35,9 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d("DBHelper", "Atualizando banco de dados da versão " + oldVersion + " para " + newVersion);
 
-        // Caso a versão anterior seja inferior à versão 2, realiza a alteração necessária
         if (oldVersion < 2) {
-            // Adiciona a coluna 'codigo_usuario' caso não exista
             db.execSQL("ALTER TABLE vacinas ADD COLUMN codigo_usuario TEXT");
             Log.d("DBHelper", "Campo 'codigo_usuario' adicionado à tabela 'vacinas'.");
         }
