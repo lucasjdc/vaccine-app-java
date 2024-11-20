@@ -16,6 +16,7 @@
 
 - **/br.senac.vaccine**: Pacote principal do projeto.
   - **/dao**: Data Access Object, responsável por interagir com a base de dados.
+  - **/database**: Criação e atualização do banco de dados SQLite.
   - **/model**: Contém as classes e objetos de dados do sistema.
   - **/ui**: Interface de usuário.
     - **/activity**: Arquivos de atividades da interface.
