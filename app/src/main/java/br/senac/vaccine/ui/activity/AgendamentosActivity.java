@@ -1,20 +1,29 @@
 package br.senac.vaccine.ui.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import br.senac.vaccine.R;
 import br.senac.vaccine.model.Agendamento;
 import br.senac.vaccine.ui.recyclerview.adapter.AgendamentoAdapter;
+import br.senac.vaccine.util.NotificationHelper;
+
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import androidx.core.app.NotificationCompat;
 
 public class AgendamentosActivity extends AppCompatActivity {
 
@@ -37,6 +46,15 @@ public class AgendamentosActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
+
 
         setContentView(R.layout.activity_agendamento);
 
@@ -66,7 +84,6 @@ public class AgendamentosActivity extends AppCompatActivity {
             String novaVacina = editNovaVacina.getText().toString();
 
 
-
             agendamentos.add(new Agendamento(novaVacina, novaData, novoHorario));
             adapter.notifyDataSetChanged();
 
@@ -75,9 +92,24 @@ public class AgendamentosActivity extends AppCompatActivity {
             editNovoHorario.setText("");
             editNovaVacina.setText("");
 
+            NotificationHelper.createNotificationChannel(AgendamentosActivity.this);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationHelper.CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle("Novo Agendamento")
+                    .setContentText("Vacina: " + novaVacina + " em " + novaData + " às " + novoHorario)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+            Intent intent = new Intent(this, AgendamentosActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            builder.setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(1, builder.build());
+
         });
 
-        btVoltar.setOnClickListener(v ->{
+        btVoltar.setOnClickListener(v -> {
             Intent intent = new Intent(AgendamentosActivity.this, MenuActivity.class);
             startActivity(intent);
             finish();
