@@ -20,7 +20,7 @@
   - **/model**: Contém as classes e objetos de dados do sistema.
   - **/ui**: Interface de usuário.
     - **/activity**: Arquivos de atividades da interface.
-    - **/recyclerview.adapter**: Adaptadores para o RecyclerView, responsável por gerenciar dados e visualização na interface.
-  -**/util**: Classes utilitárias
+    - **/recyclerview.adapter**: Adaptadores para o RecyclerView, responsável por gerenciar dados e visualização na interface.<br>
+  -**/util**: Classes utilitárias.
 - **/res**: Recursos do projeto.
   - **/layout**: Arquivos de layout XML para as telas da interface.
